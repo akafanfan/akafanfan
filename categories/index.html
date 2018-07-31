@@ -98,6 +98,39 @@
 
           
   
+    <div id="valine_thread">
+  <p>
+    留言板
+  
+  </p>
+  <div id="valine_comments"></div>
+</div>
+
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+
+<script>
+  var notify = 'false' == true ? true : false;
+  var verify = 'false' == true ? true : false;
+  var GUEST_INFO = ['nick','mail','link'];
+  var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  guest_info = guest_info.length == 0 ? GUEST_INFO : guest_info;
+  new Valine({
+    el: '#valine_comments',
+    notify: notify,
+    verify: verify,
+    appId: "782dKNNzW8HxJexYfbVvglbm-gzGzoHsz",
+    appKey: "Cs9z3WLwO0xYPACvJh8ka6c9",
+    avatar: "retro",
+    placeholder: "欢迎留言~",
+    guest_info: guest_info,
+    pageSize:"10"
+  });
+</script>
+
+  
 
 
       </main>
@@ -108,11 +141,11 @@
           
         
           
-            <a href="https://weibo.com"><i class="iconfont icon-weibo"></i></a>
+            <a href="https://weibo.com/fanfanyang1314"><i class="iconfont icon-weibo"></i></a>
           
         
           
-            <a href="https://github.com/"><i class="iconfont icon-github"></i></a>
+            <a href="https://github.com//FanFanStudio"><i class="iconfont icon-github"></i></a>
           
         
           
