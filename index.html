@@ -80,7 +80,7 @@
     <article class="post" id="post-excerpt">
       <header>
         <div class="post-title">
-          <h1><a class="post-title-link" href="/2018/07/31/Java/">Java</a></h1>
+          <h1><a class="post-title-link" href="/2018/07/31/Java/">Java Volatile�ؼ��ֽ���</a></h1>
         </div>
         <div class="post-meta">
           <span class="post-time"><i class="iconfont icon-calendar"></i>2018-07-31</span>
@@ -90,7 +90,7 @@
               <i class="iconfont icon-divide"></i>
               <div class="post-visits"
                    data-url="/2018/07/31/Java/"
-                   data-title="Java">
+                   data-title="Java Volatile�ؼ��ֽ���">
                   阅读次数
                 </div>
             
@@ -100,11 +100,66 @@
       <div class="post-content">
         <!-------------->
         
-          
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;�ڶ��̲߳��������synchronized��volatile����������Ҫ��ɫ��volatile����������synchronized�����ڶദ���������б�֤�˹�������ġ��ɼ��ԡ���</p>
+<h3 id="һ��volatile������"><a href="#һ��volatile������" class="headerlink" title="һ��volatile������"></a>һ��volatile������</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;�ڴ�ɼ��ԣ��߳�A��һ��volatile�������޸ģ����������߳��ǿɼ��ģ����̻߳�ȡvolatile������ֵ�������µġ�</p>
+<h3 id="����ʵ��ԭ�����˵��"><a href="#����ʵ��ԭ�����˵��" class="headerlink" title="����ʵ��ԭ�����˵��"></a>����ʵ��ԭ�����˵��</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;�ڴ����ϣ�<em>memory barriers</em>����һ�鴦����ָ�����ʵ�ֶ��ڴ������˳�����ơ�</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;�����У�<em>cache line</em>��CPU���ٻ����п��Է������С�洢��λ����������д������ʱ����������������С�</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;ԭ�Ӳ�����<em>atomic operations</em>�������жϵ�һ����һϵ�в�����</p>
+<h3 id="������α�֤�ڴ�ɼ���"><a href="#������α�֤�ڴ�ɼ���" class="headerlink" title="������α�֤�ڴ�ɼ���"></a>������α�֤�ڴ�ɼ���</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;��X86��������ͨ�����߻�ȡJIT���������ɵĻ��ָ�����鿴��volatileд����ʱ�������</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;Java����</p>
+<pre><code>instance = new Singleton();//instance��volatile����
+</code></pre><p>? ? ת��Ϊ������</p>
+<pre><code>0x01a3deld:movb $0��0,0��1104800(%esi);0x01a3de24: lock addl $0��0,(%esp);
+</code></pre><p>? ? ��volatile�������εĹ����������д����ʱ���һ�л����룬������lock�ؼ��ʣ�Lockǰ׺ָ���ڶ�˴������»������������飺<br>����ǰ�����������е�����д�ص�ϵͳ�ڴ档<br>���д�ز�����ʹ������CPU�ﻺ���˸��ڴ��ַ��������Ч��<br>? ?<br>Ϊ����ߴ����ٶȣ���������ֱ�Ӻ��ڴ����ͨ�ţ������Ƚ�ϵͳ�ڴ�����ݶ����ڲ�������ٽ��в��������ǲ����겻֪����ʱд���ڴ��С�<br><img src="https://img-blog.csdn.net/20180520194219586" alt=""><br>? ??????????????????????</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;�����������volatile��������д������JVM�ͻ�����������һ��Lockǰ׺ָ�������������ڵĻ����е�����д�ص�ϵͳ�ڴ档�����������������ֵ���Ǿɵģ������ڶദ���������£�Ϊ��֤�����������Ļ�����һ�µģ��ͻ�ʵ�ֻ���һ����Э�飬ÿ��������ͨ����̽�������ϴ���������������Լ������ֵ�ǲ��ǹ����ˣ��������������Լ������ж�Ӧ���ڴ��ַ���޸ģ��ͻὫ�û���������Ϊ��Ч״̬������������������ݽ��в���ʱ�ͻ����´��ڴ��ж�ȡ���ݵ������С�</p>
+<p><img src="https://img-blog.csdn.net/20180520200322919" alt="">????????????????????????????</p>
+<h3 id="�g�volatileʵ��ԭ��"><a href="#�g�volatileʵ��ԭ��" class="headerlink" title="�ġ�volatileʵ��ԭ��"></a>�ġ�volatileʵ��ԭ��</h3><ol>
+<li>Lockǰ׺ָ���������������д�ص��ڴ档</li>
+<li>һ���������Ļ���д�ص��ڴ�ᵼ�������������Ļ�����Ч��</li>
+</ol>
+<h3 id="�塢volatile��ʹ�o���"><a href="#�塢volatile��ʹ�o���" class="headerlink" title="�塢volatile��ʹ�ó���"></a>�塢volatile��ʹ�ó���</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;ͨ���ؼ���sychronize���Է�ֹ����߳̽���ͬһ�δ��룬��ĳЩ�ض������У�volatile�൱��һ����������sychronize����Ϊ���������̵߳��������л�������ʹ��volatile������������������</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;�Ա�����д������������ǰֵ������߳���ִ��a++�����޷�ͨ��volatile��֤���׼ȷ�Եģ�<br>�ñ���û�а����ھ������������Ĳ���ʽ�У���仰�е��ֿڣ�������Ƚ�ֱ�ۡ�<br>????����Ŀ�о������õ�volatile�ؼ��ֵ�����������</p>
+<h4 id="1��״̬�����"><a href="#1��״̬�����" class="headerlink" title="1��״̬�����"></a>1��״̬�����</h4><p>????�ڸ߲��������У�ͨ��һ��boolean���͵ı��� flag�����ƴ����Ƿ��������߼���</p>
+<pre><code>public class Handler {
+    private volatile flag; 
+    public void setFlag(boolean flag) {
+        this.flag = falag;
+    }
+       public void run() {
+        if (flag) {
+           //�����߼�
+        } else {
+          //�����߼�
+        }
+    }
+}
+</code></pre><p>&nbsp;&nbsp;&nbsp;&nbsp;�û��������߳�ִ��run�����������Ҫ���������������ͨ����̨���ã�����ʵ�ֿ��Է���һ�����󣬵�����������������flagΪtrue������flag��volatile���εģ�����һ���޸ģ������̶߳������õ�flag������ֵ���û�����Ϳ���ִ�������߼��ˡ�</p>
+<h4 id="2-˫����-˫��У������DCL����-double-checked-locking��"><a href="#2-˫����-˫��У������DCL����-double-checked-locking��" class="headerlink" title="2.˫����/˫��У������DCL���� double-checked locking��"></a>2.˫����/˫��У������DCL���� double-checked locking��</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;����ģʽ��һ��ʵ�ַ�ʽ�����û��volatile�ؼ��֣������bug��</p>
+<p>?<br>&nbsp;&nbsp;&nbsp;volatile�ؼ��ֿ��Ա�֤jvmִ�е�һ����”������”����ָ��1��ָ��2ִ����֮ǰ��ָ��3һ�����ᱻִ�С�����ֹ������<br>?��֤��volatile�������޸ĺ�����ˢ�»�פ�ڴ��С�</p>
+<pre><code>public class Singleton {  
+    private volatile static Singleton singleton;  
+    private Singleton (){}  
+    public static Singleton getSingleton() {  
+        if (singleton == null) {  
+            synchronized (Singleton.class) {  
+            if (singleton == null) {  
+                singleton = new Singleton();  
+            }  
+            }  
+        }  
+        return singleton;  
+   }  
+}  
+</code></pre><p>�ο����ϣ�</p>
+<p>-��Java������̵������� ���ڷ� κ�� ������ ��</p>
+<p>-?<a href="https://www.jianshu.com/p/195ae7c77afe?" target="_blank" rel="noopener">https://www.jianshu.com/p/195ae7c77afe?</a></p>
+
         
         <!-------------->
       </div>
       <div class="post-tags">
+      
+        <a class="tag-link" href="/tags/Java/">Java</a>
       
     </div>
     </article>
