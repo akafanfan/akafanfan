@@ -222,7 +222,7 @@ main {
   left: 0;
   top: 0;
   z-index: 9;
-  background: #34495e;
+  background: #373737;
   box-shadow: 0 2px 10px rgba(52, 73, 94, 0.9); }
   .mobile-header span, .mobile-header a {
     color: #fff; }
@@ -246,7 +246,7 @@ header.site-nav {
   display: none;
   width: 100%;
   min-height: 40px;
-  background: rgba(52, 73, 94, 0.9);
+  background: rgba(0, 188, 213, 0.9);
   margin: 0;
   position: fixed;
   top: 0;
@@ -301,7 +301,7 @@ header.site-nav {
     z-index: 2;
     font-size: 65px;
     height: 500px;
-    background: #34495e;
+    background: #373737;
     color: #fff;
     text-align: center; }
     .banner .show div.banner-title {
@@ -328,7 +328,7 @@ header.site-nav {
             font-size: 16px; }
           .banner .show div.banner-title .post-title .post-tags a:hover {
             background: #fff;
-            color: #34495e; }
+            color: #373737; }
 
 article#post-excerpt {
   min-height: 0; }
@@ -430,9 +430,9 @@ article.post {
     article.post .post-tags a {
       display: inline-block;
       text-decoration: none;
-      color: #34495e;
+      color: #373737;
       margin: 5px;
-      border: 1px solid #34495e;
+      border: 1px solid #373737;
       border-radius: 2px;
       padding: 0 5px;
       font-size: 12px; }
@@ -813,7 +813,7 @@ code {
 
 footer {
   height: 170px;
-  background: #34495e;
+  background: #373737;
   text-align: center;
   color: #fff;
   font-size: 16px; }
@@ -1045,7 +1045,7 @@ footer {
   article.post {
     padding: 10px; }
     article.post .mobile-post-title > h1 {
-      border-left: 3px solid #34495e;
+      border-left: 3px solid #373737;
       margin: -10px 0 0 -10px;
       padding: 12px 0 12px 10px; }
     article.post .post-meta .post-time {
