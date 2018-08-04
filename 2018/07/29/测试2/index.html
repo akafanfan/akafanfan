@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name="theme-color" content="#34495e">
-  <title>Fan&#39;s Blog</title>
+  <title>测试2！ | Fan&#39;s Blog</title>
   <link rel="alternate" href="path/of/rss" type="application/atom+xml">
   <link rel="shortcut icon" type="image/ico" href="/fan.ico">
   <link rel="stylesheet" href="/css/style.css">
@@ -66,8 +66,13 @@
     <!-- <img src="/" alt="banner"> -->
     <div class="banner-title">
       
-        <div class="intro">
-          a space full of imagination
+        <div class="post-title">
+          测试2！
+            <div class="post-tags">
+    		    
+              <a class="tag-link" href="/tags/测试/">测试</a>
+            
+    	      </div>
         </div>
       
     </div>
@@ -75,31 +80,97 @@
 </div>
 
       <main class="main"id="main">
-          
-<div class="tags-container category-container">
-  <h4 class="category-item-name"><i class="iconfont icon-folder"></i>Java</h4>
+          <article class="post">
   
-    <div class="category-item">
-      
-        <a href="/2018/07/31/Java/">
-          <time datetime="2018-07-31T07:54:32.000Z">
-            2018-07-31
-          </time>
-          <span class="category-title">Java Volatile关键字解析</span>
-        </a>
-      
+
+  <header>
+    <div class="post-title mobile-post-title">
+      <h1>测试2！</h1>
+        <div class="post-tags">
+        
+          <a class="tag-link" href="/tags/测试/">测试</a>
+        
+        </div>
     </div>
+    <div class="post-meta">
+      <span class="post-time"><i class="iconfont icon-calendar"></i>2018-07-29</span>
+      
+          
+            <i class="iconfont icon-divide"></i>
+            <i class="iconfont icon-folder" style="color: #8a8a8a;"></i>
+            <a class="post-category" href="/categories/测试/">测试</a>
+          
+      
+      <!----------------------------------->
+        
+          <i class="iconfont icon-divide"></i>
+          <div class="post-visits"
+               data-url="/2018/07/29/测试2/"
+               data-title="测试2！">
+              阅读次数
+            </div>
+        
+      <!----------------------------------->
+    </div>
+  </header>
   
-</div>
+
+  <div class="post-content">
+    <p>Hello World！<br>测试2</p>
+
+  </div>
+  <div class="post-footer">the end</div>
+</article>
 
           
-     <nav class="pagination">
+  <nav class="pagination post-nav">
     
+      <a href="/2018/07/31/Java/">
+        <span class="prev-post"><i class="iconfont icon-back"></i>Java Volatile关键字解析</span>
+      </a>
+    
+    
+      <a href="/2018/07/29/测试1/">
+        <span class="next-post">我的第一篇文章！<i class="iconfont icon-more"></i></span>
+      </a>
     
   </nav>
 
 
           
+  
+    <div id="valine_thread">
+  <p>
+    留言板
+  
+  </p>
+  <div id="valine_comments"></div>
+</div>
+
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+
+<script>
+  var notify = 'false' == true ? true : false;
+  var verify = 'false' == true ? true : false;
+  var GUEST_INFO = ['nick','mail','link'];
+  var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  guest_info = guest_info.length == 0 ? GUEST_INFO : guest_info;
+  new Valine({
+    el: '#valine_comments',
+    notify: notify,
+    verify: verify,
+    appId: "782dKNNzW8HxJexYfbVvglbm-gzGzoHsz",
+    appKey: "Cs9z3WLwO0xYPACvJh8ka6c9",
+    avatar: "retro",
+    placeholder: "欢迎留言~记得填写自己的昵称和邮箱呦~方便联系~",
+    guest_info: guest_info,
+    pageSize:"10"
+  });
+</script>
+
   
 
 
