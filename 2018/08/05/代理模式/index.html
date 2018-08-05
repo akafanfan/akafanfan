@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#34495e">
+  <title>设计模式—代理模式 | Fan&#39;s Blog</title>
+  <link rel="alternate" href="path/of/rss" type="application/atom+xml">
+  <link rel="shortcut icon" type="image/ico" href="/fan.ico">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  
+
+  
+
+  
+
+</head>
+
+<body>
+  <div class="mobile-header">
+    <span><i class="iconfont icon-turnon" id="mobile-nav-toggle"></i></span>
+    <div class="mobile-logo">
+      <a href="/.">FanStudio</a>
+    </div>
+  </div>
+  <div class="page" id="mobile-nav-panel">
+    <div class="container">
+      <header class="site-nav">
+      <div class="nav-content">
+        <div class="logo">
+          <a href="/">FanStudio</a>
+        </div>
+        <nav class="navbar">
+          <ul>
+            
+              <li class="menu-item">
+                <a href="/" class="menu-item-link"><i class="iconfont icon-home"></i>首页</a>
+              </li>
+            
+              <li class="menu-item">
+                <a href="/archives" class="menu-item-link"><i class="iconfont icon-archive"></i>归档</a>
+              </li>
+            
+              <li class="menu-item">
+                <a href="/categories" class="menu-item-link"><i class="iconfont icon-category"></i>分类</a>
+              </li>
+            
+              <li class="menu-item">
+                <a href="/tags" class="menu-item-link"><i class="iconfont icon-tags"></i>标签</a>
+              </li>
+            
+              <li class="menu-item">
+                <a href="/about" class="menu-item-link"><i class="iconfont icon-about"></i>关于</a>
+              </li>
+            
+          </ul>
+        </nav>
+      </div>
+</header>
+
+      <div class="banner">
+  <div class="show">
+    <!-- <img src="/" alt="banner"> -->
+    <div class="banner-title">
+      
+        <div class="post-title">
+          设计模式—代理模式
+            <div class="post-tags">
+    		    
+              <a class="tag-link" href="/tags/设计模式/">设计模式</a>
+            
+    	      </div>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+      <main class="main"id="main">
+          <article class="post">
+  
+
+  <header>
+    <div class="post-title mobile-post-title">
+      <h1>设计模式—代理模式</h1>
+        <div class="post-tags">
+        
+          <a class="tag-link" href="/tags/设计模式/">设计模式</a>
+        
+        </div>
+    </div>
+    <div class="post-meta">
+      <span class="post-time"><i class="iconfont icon-calendar"></i>2018-08-05</span>
+      
+          
+            <i class="iconfont icon-divide"></i>
+            <i class="iconfont icon-folder" style="color: #8a8a8a;"></i>
+            <a class="post-category" href="/categories/设计模式/">设计模式</a>
+          
+      
+      <!----------------------------------->
+        
+          <i class="iconfont icon-divide"></i>
+          <div class="post-visits"
+               data-url="/2018/08/05/代理模式/"
+               data-title="设计模式—代理模式">
+              阅读次数
+            </div>
+        
+      <!----------------------------------->
+    </div>
+  </header>
+  
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#代理模式的定义"><span class="toc-text">代理模式的定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代理模式的应用"><span class="toc-text">代理模式的应用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#代理模式的优点"><span class="toc-text">代理模式的优点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#代理模式的使用场景"><span class="toc-text">代理模式的使用场景</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代理模式的扩展"><span class="toc-text">代理模式的扩展</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#普通代理"><span class="toc-text">普通代理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#强制代理"><span class="toc-text">强制代理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#代理的有自己的个性"><span class="toc-text">代理的有自己的个性</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#动态代理"><span class="toc-text">动态代理</span></a></li></ol>
+    </div>
+  </div>
+
+
+  <div class="post-content">
+    <h3 id="代理模式的定义"><a href="#代理模式的定义" class="headerlink" title="代理模式的定义"></a>代理模式的定义</h3><p>代理模式（Proxy Pattern）是一个使用率非常高的模式。<br>定义：<em>Provide a surrogate or placeholder for another object to control access to it.</em> (为其对象提供一种代理以控制这个对象的访问)<br><a id="more"></a><br><img src="http://upload-images.jianshu.io/upload_images/12028628-9314d27dc67ba599.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="代理模式的通用类图"><br>代理模式也叫委托模式，它是一项基本的设计技巧。许多其他的模式，如状态模式、策略模式、访问者模式本质上是在更特殊的场合采用了委托模式，而且在日常应用中，代理模式可以提供非常好的访问控制。</p>
+<p>三个角色的定义</p>
+<ul>
+<li><strong>Subject抽象主题角色</strong></li>
+</ul>
+<p>抽象主题类可以是抽象类也可以是接口，是一个最普通的业务类型定义，无特殊要求。</p>
+<ul>
+<li><strong>RealSubject具体的主题角色</strong></li>
+</ul>
+<p>也叫做被委托的角色、被代理的角色。是业务逻辑的具体执行者。</p>
+<ul>
+<li><strong>Proxy代理主题角色</strong></li>
+</ul>
+<p>也叫委托类、代理类。它负责对真实角色的应用，把所以抽象主题定义的方法限制委托给真实主题角色实现，并且在真实主题角色处理完毕前后做预处理和善后工作。</p>
+<blockquote>
+<p>抽象主题类：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public interface Subject &#123;</span><br><span class="line">	//定义一个方法</span><br><span class="line">	public void request();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>真实主题类：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public class RealSubject implements Subject &#123;</span><br><span class="line">	//实现方法</span><br><span class="line">	@Override</span><br><span class="line">	public void request() &#123;</span><br><span class="line">		//业务逻辑处理</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>代理类：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">public class Proxy implements Subject &#123;</span><br><span class="line">	//要代理哪个实现类</span><br><span class="line">	private Subject subject = null;</span><br><span class="line">	//默认被代理者</span><br><span class="line">	public Proxy() &#123;</span><br><span class="line">		this.subject = new Proxy();</span><br><span class="line">	&#125;</span><br><span class="line">	//通过构造函数传递代理者</span><br><span class="line">	public Proxy(Object object)&#123;</span><br><span class="line">	&#125;</span><br><span class="line">	//实现接口中的方法</span><br><span class="line">	@Override</span><br><span class="line">	public void request() &#123;</span><br><span class="line">		this.before();</span><br><span class="line">		this.request();</span><br><span class="line">		this.after();</span><br><span class="line">	&#125;</span><br><span class="line">	//预处理</span><br><span class="line">	private void before() &#123;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	//善后处理</span><br><span class="line">	private void after() &#123;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>一个代理类可以代理多个被委托者或者被代理者，因此一个代理者具体代理哪个真实主题角色，是由场景类决定的。在通常情况下，一个接口只需要一个代理类就可以了，具体代理哪个实现类由高层模块决定，也就是在代理类的构造函数中传递被代理者。</p>
+<hr>
+<h3 id="代理模式的应用"><a href="#代理模式的应用" class="headerlink" title="代理模式的应用"></a>代理模式的应用</h3><h4 id="代理模式的优点"><a href="#代理模式的优点" class="headerlink" title="代理模式的优点"></a>代理模式的优点</h4><ul>
+<li><strong>职责清晰</strong><br>真实的角色就是实现实际的业务逻辑，不用关心其他非本职责的事务，通过后期的代理完成一件事物，附带的结果就是编程简洁清晰。</li>
+<li><strong>高扩展性</strong><br>具体主题角色是随时会发生变化的，只要它实现了接口，无论它如何变化都逃不脱接口，那我们的代理类完全就可以在不做任何修改的情况下使用。</li>
+<li><strong>智能化</strong><br>动态代理的典型应用<h4 id="代理模式的使用场景"><a href="#代理模式的使用场景" class="headerlink" title="代理模式的使用场景"></a>代理模式的使用场景</h4>类似现实生活中买房子的中介，打官司的律师。你不想参与中间过程的是是非非。减轻用户的负担。代理模式使用场景非常多。最典型的是Spring AOP中的动态代理。</li>
+</ul>
+<hr>
+<h3 id="代理模式的扩展"><a href="#代理模式的扩展" class="headerlink" title="代理模式的扩展"></a>代理模式的扩展</h3><h4 id="普通代理"><a href="#普通代理" class="headerlink" title="普通代理"></a>普通代理</h4><p>普通代理就是我们要知道代理的存在，也就是类似GamePlayerProxy这个代理类的存在，然后才能访问。<br>普通代理的要求就是客户端只能访问代理角色，而不能访问真实角色。以游戏代练为例子，</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/12028628-2bb839510e6597c8.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="普通代理类图.jpg"></p>
+<blockquote>
+<p>游戏者接口</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public interface IGamePlayer &#123;</span><br><span class="line">	//登陆</span><br><span class="line">	public void login(String user,String password);</span><br><span class="line">	//杀怪</span><br><span class="line">	public void killBoss();</span><br><span class="line">	//升级</span><br><span class="line">	public void upgrade();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>GamePlayer的构造函数增加了_gamePlayer参数，而代理角色则只要传入代理者名字即可，而不需要说是替哪个对象做代理</p>
+<blockquote>
+<p>普通代理的游戏者</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">public class GamePlayer implements IGamePlayer &#123;</span><br><span class="line">	private String name=&quot;&quot;;</span><br><span class="line">	//构造函数限制谁能创建对象，并同时传递姓名</span><br><span class="line">	public GamePlayer(IGamePlayer _gamePlayer,String _name) throws Exception &#123;</span><br><span class="line">		if(_gamePlayer==null)&#123;</span><br><span class="line">			throw new Exception(&quot;不能创建真实角色&quot;);</span><br><span class="line">		&#125;else&#123;</span><br><span class="line">			this.name = _name;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	@Override</span><br><span class="line">	public void login(String user, String password) &#123;</span><br><span class="line">		System.out.println(&quot;登录名为&quot;+user+&quot;的用户&quot;+this.name+&quot; 登录成功&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">	@Override</span><br><span class="line">	public void killBoss() &#123;</span><br><span class="line">		System.out.println(this.name+&quot;在击杀小怪&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">	@Override</span><br><span class="line">	public void upgrade() &#123;</span><br><span class="line">		System.out.println(this.name+&quot;又升一级&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在构造函数中，传来进来一个IGaemPlayer对象，检查谁能创建真实的角色，或者做出别的限制。</p>
+<blockquote>
+<p>普通代理的代理者</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">public class GamePlayProxy implements IGamePlayer &#123;</span><br><span class="line">	private IGamePlayer gamePlayer = null;</span><br><span class="line">	//通过构造函数传递要对谁进行代练</span><br><span class="line">	public GamePlayProxy(String name) &#123;</span><br><span class="line">		try &#123;</span><br><span class="line">			gamePlayer = new GamePlayer(this, name);</span><br><span class="line">		&#125; catch (Exception e) &#123;</span><br><span class="line">			//异常处理</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	@Override</span><br><span class="line">	public void login(String user, String password) &#123;</span><br><span class="line">		this.gamePlayer.login(user, password);</span><br><span class="line">	&#125;</span><br><span class="line">	@Override</span><br><span class="line">	public void killBoss() &#123;</span><br><span class="line">		this.gamePlayer.killBoss();</span><br><span class="line">	&#125;</span><br><span class="line">	@Override</span><br><span class="line">	public void upgrade() &#123;</span><br><span class="line">		this.gamePlayer.upgrade();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>仅仅修改了构造函数，传递进来一个代理者名称，即可进行代理，在这种改造下，系统更加简洁，调用者只知道代理的存在就行，不用知道代理了谁。</p>
+<blockquote>
+<p>普通代理的场景</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public class Client &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		//定义一个代练者</span><br><span class="line">		IGamePlayer proxy = new GamePlayProxy(&quot;代练玩家&quot;);</span><br><span class="line">		//开始游戏 ，记下时间</span><br><span class="line">		System.out.println(&quot;开始时间:2018-8-1 13:10&quot;);</span><br><span class="line">		proxy.login(&quot;Yang&quot;, &quot;123123&quot;);</span><br><span class="line">		//开始杀怪</span><br><span class="line">		proxy.killBoss();</span><br><span class="line">		//开始升级</span><br><span class="line">		proxy.upgrade();</span><br><span class="line">		//记录结束游戏时间</span><br><span class="line">		System.out.println(&quot;结束时间:2018-8-1 15:10&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>结果:</p>
+<blockquote>
+<p>开始时间:2018-8-1 13:10<br>登录名为Yang的用户代练玩家 登录成功<br>代练玩家在击杀小怪<br>代练玩家又升一级<br>结束时间:2018-8-1 15:10</p>
+</blockquote>
+</blockquote>
+<p>在该模式下，调用者只知道代理而不知道真实的角色是谁，屏蔽了真实角色的变更对高层模块的影响，真实的主题角色想怎么修改都可以，对高层次的模块没有任何的影响，只要你实现了接口所对应的方法，该模式非常适合对扩展性要求较高的场合。</p>
+<h4 id="强制代理"><a href="#强制代理" class="headerlink" title="强制代理"></a>强制代理</h4><p>强制代理是要“强制”，必须通过真实角色查找到代理角色，否则不能进行访问。无论是通过代理类还是直接new一个主题角色类，都不能访问，只有通过真实角色指定的代理类才能访问，也就是说由真实的角色管理代理角色。例如你和一个明星比较熟，你直接找明星帮忙要见导演，但是明星说她比较忙，让你找她的经纪人。你本来想绕过她的代理，谁知道她返回的还是她的代理，这就是强制代理。你可以不知道代理的存在，但是你的所作所为还是需要代理为你提供服务。<br><img src="https://upload-images.jianshu.io/upload_images/12028628-0d5588c340499f66.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="强制代理类图.jpg"><br>在接口上增加了一个<strong>getProxy()</strong>方法，真实角色<strong>GamePlayer</strong>可以指定一个自己的代理，除了代理外谁都不能访问。</p>
+<blockquote>
+<p>强制代理的接口<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public interface IGamePlayer &#123;</span><br><span class="line">	//登陆</span><br><span class="line">	public void login(String user,String password);</span><br><span class="line">	//杀怪</span><br><span class="line">	public void killBoss();</span><br><span class="line">	//升级</span><br><span class="line">	public void upgrade();</span><br><span class="line">	//每个人都可以找自己的代理</span><br><span class="line">	public IGamePlayer getProxy();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>强制代理的真实角色</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">public class GamePlayer implements IGamePlayer&#123;</span><br><span class="line">	private String name=&quot;&quot;;</span><br><span class="line">	//自己代理是</span><br><span class="line">	private IGamePlayer proxy =null;</span><br><span class="line">	public GamePlayer(String _name)&#123;</span><br><span class="line">		this.name =_name;</span><br><span class="line">	&#125;</span><br><span class="line">	//找到自己的代理</span><br><span class="line">	@Override</span><br><span class="line">	public IGamePlayer getProxy() &#123;</span><br><span class="line">		this.proxy = new GamePlayerProxy(this);</span><br><span class="line">		return this.proxy;</span><br><span class="line">	&#125;</span><br><span class="line">	//登录</span><br><span class="line">	@Override</span><br><span class="line">	public void login(String user, String password) &#123;</span><br><span class="line">		if(this.isProxy())&#123;</span><br><span class="line">			System.out.println(&quot;登录名为&quot;+user+&quot;的用户&quot;+this.name+&quot; 登录成功&quot;);</span><br><span class="line">		&#125;else&#123;</span><br><span class="line">			System.out.println(&quot;请使用指定代理进行访问&quot;);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	//杀怪</span><br><span class="line">	@Override</span><br><span class="line">	public void killBoss() &#123;</span><br><span class="line">		if(this.isProxy())&#123;</span><br><span class="line">			System.out.println(this.name+&quot;击杀小怪&quot;);</span><br><span class="line">		&#125;else&#123;</span><br><span class="line">			System.out.println(&quot;请使用指定代理进行访问&quot;);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	//升级</span><br><span class="line">	@Override</span><br><span class="line">	public void upgrade() &#123;</span><br><span class="line">		if(this.isProxy())&#123;</span><br><span class="line">			System.out.println(this.name+&quot;又升一级&quot;);</span><br><span class="line">		&#125;else&#123;</span><br><span class="line">			System.out.println(&quot;请使用指定代理进行访问&quot;);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	//校验是否是代理访问</span><br><span class="line">	private boolean isProxy() &#123;</span><br><span class="line">		if(this.proxy == null)&#123;</span><br><span class="line">			return false;</span><br><span class="line">		&#125;else&#123;</span><br><span class="line">			return true;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>强制代理的代理角色</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">public class GamePlayerProxy implements IGamePlayer &#123;</span><br><span class="line">	private IGamePlayer gamePlayer = null;</span><br><span class="line">	//构造函数传递用户名</span><br><span class="line">	public GamePlayerProxy(IGamePlayer _gamePlayer)&#123;</span><br><span class="line">		this.gamePlayer = _gamePlayer;</span><br><span class="line">	&#125;</span><br><span class="line">	@Override</span><br><span class="line">	public void login(String user, String password) &#123;</span><br><span class="line">		this.gamePlayer.login(user, password);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public void killBoss() &#123;</span><br><span class="line">		this.gamePlayer.killBoss();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public void upgrade() &#123;</span><br><span class="line">		this.gamePlayer.upgrade();</span><br><span class="line">	&#125;</span><br><span class="line">	//代理的代理暂时没有，就是自己</span><br><span class="line">	@Override</span><br><span class="line">	public IGamePlayer getProxy() &#123;</span><br><span class="line">		return this;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>强制代理的场景</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public class Client &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		//定义一个真实角色</span><br><span class="line">		IGamePlayer player = new GamePlayer(&quot;张三&quot;);</span><br><span class="line">		//获得指定的代理</span><br><span class="line">		IGamePlayer proxy = player.getProxy();</span><br><span class="line">		//开始游戏</span><br><span class="line">		System.out.println(&quot;开始时间:2018-8-1 13:10&quot;);</span><br><span class="line">		proxy.login(&quot;yang&quot;, &quot;123123&quot;);</span><br><span class="line">		//开始杀怪</span><br><span class="line">		proxy.killBoss();</span><br><span class="line">		//开始升级</span><br><span class="line">		proxy.upgrade();</span><br><span class="line">		//记录结束游戏时间</span><br><span class="line">		System.out.println(&quot;结束时间:2018-8-1 15:10&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>结果：</p>
+<blockquote>
+<p>开始时间:2018-8-1 13:10<br>登录名为yang的用户张三 登录成功<br>张三击杀小怪<br>张三又升一级<br>结束时间:2018-8-1 15:10</p>
+</blockquote>
+</blockquote>
+<p> 强制代理的概念就是要从真实的角色查找到代理角色，不允许直接访问真实角色。高层模块只要调用<strong>getProxy()</strong>就可以访问真实角色的所以方法，它根本不需要产生一个代理出来，代理的管理已经由真实角色自己完成。</p>
+<h4 id="代理的有自己的个性"><a href="#代理的有自己的个性" class="headerlink" title="代理的有自己的个性"></a>代理的有自己的个性</h4><p>一个类可以实现多个接口，完成不同任务的整合。也就是说代理类不仅仅可以实现主题接口，也可以实现其他接口完成不同的任务，而且代理的目的是在目标对象方法的基础上作增强，这种增强的本质通常就是对目标对象的方法进行拦截合过滤。</p>
+<hr>
+<h3 id="动态代理"><a href="#动态代理" class="headerlink" title="动态代理"></a>动态代理</h3><p>。。。未完待续</p>
+
+  </div>
+  <div class="post-footer">the end</div>
+</article>
+
+          
+  <nav class="pagination post-nav">
+    
+    
+      <a href="/2018/07/31/Volatile关键字解析/">
+        <span class="next-post">Java Volatile关键字解析<i class="iconfont icon-more"></i></span>
+      </a>
+    
+  </nav>
+
+
+          
+  
+    <div id="valine_thread">
+  <p>
+    留言板
+  
+  </p>
+  <div id="valine_comments"></div>
+</div>
+
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+
+<script>
+  var notify = 'false' == true ? true : false;
+  var verify = 'false' == true ? true : false;
+  var GUEST_INFO = ['nick','mail','link'];
+  var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  guest_info = guest_info.length == 0 ? GUEST_INFO : guest_info;
+  new Valine({
+    el: '#valine_comments',
+    notify: notify,
+    verify: verify,
+    appId: "782dKNNzW8HxJexYfbVvglbm-gzGzoHsz",
+    appKey: "Cs9z3WLwO0xYPACvJh8ka6c9",
+    avatar: "retro",
+    placeholder: "欢迎留言~记得填写自己的昵称和邮箱呦~方便联系~",
+    guest_info: guest_info,
+    pageSize:"10"
+  });
+</script>
+
+  
+
+
+      </main>
+    </div>
+    <footer>
+      <div class="social-links">
+        
+          
+        
+          
+            <a href="https://weibo.com/fanfanyang1314"><i class="iconfont icon-weibo"></i></a>
+          
+        
+          
+        
+          
+            <a href="https://www.jianshu.com/u/02166aa314ee"><i class="iconfont icon-stackoverflow"></i></a>
+          
+        
+          
+            <a href="http://steamcommunity.com/id/fanfanyang"><i class="iconfont icon-steam"></i></a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+      
+        <div class="quote">
+          <p>总会有一个人 听你听过的歌 走你走过的路 看你看过的书 愿意弥补曾与你错过的青春和过往 也愿意陪你走过细水长流</p>
+        </div>
+      
+      <div class="copyright">
+        <p>
+          由 <a href="https://hexo.io/">Hexo</a> 强力驱动
+        <p>
+          <span>
+          
+          &copy;
+          
+            2018
+          
+          </span>
+          <i class="iconfont icon-circle"></i>
+          <span>YangFan</span>
+        </p>
+      </div>
+</footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <div id="mobile-nav">
+  <nav id="mobile-nav-menu">
+    
+      <a href="/" class="mobile-nav-link"><i class="iconfont icon-home"></i>首页</a>
+    
+      <a href="/archives" class="mobile-nav-link"><i class="iconfont icon-archive"></i>归档</a>
+    
+      <a href="/categories" class="mobile-nav-link"><i class="iconfont icon-category"></i>分类</a>
+    
+      <a href="/tags" class="mobile-nav-link"><i class="iconfont icon-tags"></i>标签</a>
+    
+      <a href="/about" class="mobile-nav-link"><i class="iconfont icon-about"></i>关于</a>
+    
+    <div class="mobile-intro"><i class="iconfont icon-pen"></i>a space full of imagination</div>
+  </nav>
+</div>
+
+
+  <script src="/libs/jQuery/jquery-3.2.1.min.js"></script>
+  <script src="/libs/slideout/slideout.min.js"></script>
+  
+    <link rel="stylesheet" href="/libs/fancybox/jquery.fancybox.css">
+    <script src="/libs/fancybox/jquery.fancybox.pack.js"></script>
+  
+  
+  <script src="//cdn1.lncld.net/static/js/3.2.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+        appId: "782dKNNzW8HxJexYfbVvglbm-gzGzoHsz",
+        appKey: "Cs9z3WLwO0xYPACvJh8ka6c9"
+      });
+  </script>
+  <script>
+  (function (window) {
+      $(document).ready(function () {
+        visits();
+      });
+    function visits() {
+      var $visits = $('.post-visits');
+
+      function updateVisits(dom, time) {
+        var text = dom.text() + ' ' + time;
+        dom.text(text);
+      }
+
+      function addCounter(Counter) {
+        var query = new AV.Query(Counter);
+
+        var url = $visits.data('url').trim();
+        var title = $visits.data('title').trim();
+
+        query.equalTo('url', url);
+        query.find().then(function (results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.save(null, {
+              fetchWhenSave: true
+            }).then(function (counter) {
+              counter.increment('time', 1);
+              return counter.save();
+            }).then(function (counter) {
+              updateVisits($visits, counter.get('time'));
+            });
+          } else {
+            var newcounter = new Counter();
+            newcounter.set('title', title);
+            newcounter.set('url', url);
+            newcounter.set('time', 1);
+
+            newcounter.save().then(function (counter) {
+              updateVisits($visits, newcounter.get('time'));
+            });
+          }
+        }, function (error) {
+          console.log('Error:' + error.code + " " + error.message);
+        });
+      }
+
+      function showTime(Counter) {
+        $visits.each(function () {
+          var $this = $(this);
+          var query = new AV.Query(Counter);
+          var url = $this.data('url').trim();
+
+          query.equalTo('url', url);
+          query.find().then(function (results) {
+            if (results.length === 0) {
+              updateVisits($this, 0);
+            } else {
+              var counter = results[0];
+              updateVisits($this, counter.get('time'));
+            }
+          }, function (error) {
+            console.log('Error:' + error.code + " " + error.message);
+          });
+        })
+      }
+
+      if (typeof AV === 'object') {
+        var Counter = AV.Object.extend('Counter');
+        if ($visits.length === 1) {
+          addCounter(Counter);
+        } else {
+          showTime(Counter);
+        }
+      }
+    }
+  })(window);
+  </script>
+
+
+  <script src="/js/ztopic.js"></script>
+</body>
+</html>
