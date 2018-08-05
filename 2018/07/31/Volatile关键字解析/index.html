@@ -105,7 +105,7 @@
         
           <i class="iconfont icon-divide"></i>
           <div class="post-visits"
-               data-url="/2018/07/31/Java/"
+               data-url="/2018/07/31/Volatile关键字解析/"
                data-title="Java Volatile关键字解析">
               阅读次数
             </div>
@@ -156,12 +156,37 @@
 </blockquote>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在项目中经常会用到volatile关键字的两个场景：</p>
 <h4 id="1、状态标记量"><a href="#1、状态标记量" class="headerlink" title="1、状态标记量"></a>1、状态标记量</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在高并发环境中，通过一个boolean类型的变量 flag，控制代码是否走其他逻辑。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">   public class Handler &#123;</span><br><span class="line">   	private volatile flag; </span><br><span class="line">   	public void setFlag(boolean flag) &#123;</span><br><span class="line">     	  this.flag = falag;</span><br><span class="line">   	&#125;</span><br><span class="line">  		public void run() &#123;</span><br><span class="line">       	if (flag) &#123;</span><br><span class="line">       	   //其他逻辑</span><br><span class="line">       	&#125; else &#123;</span><br><span class="line">         	//正常逻辑</span><br><span class="line">       	&#125;</span><br><span class="line">   	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用户的请求线程执行run方法，如果需要开启其他活动，可以通过后台设置，具体实现可以发送一个请求，调用其他方法并设置flag为true，由于flag是volatile修饰的，所以一经修改，其他线程都可以拿到flag的最新值，用户请求就可以执行其他逻辑了。</p>
+<pre><code>public class Handler {
+    private volatile flag; 
+    public void setFlag(boolean flag) {
+      this.flag = falag;
+    }
+    public void run() {
+        if (flag) {
+           //其他逻辑
+        } else {
+        //正常逻辑
+        }
+    }
+}
+</code></pre><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用户的请求线程执行run方法，如果需要开启其他活动，可以通过后台设置，具体实现可以发送一个请求，调用其他方法并设置flag为true，由于flag是volatile修饰的，所以一经修改，其他线程都可以拿到flag的最新值，用户请求就可以执行其他逻辑了。</p>
 <h4 id="2-双检锁-双重校验锁（DCL，即-double-checked-locking）"><a href="#2-双检锁-双重校验锁（DCL，即-double-checked-locking）" class="headerlink" title="2.双检锁/双重校验锁（DCL，即 double-checked locking）"></a>2.双检锁/双重校验锁（DCL，即 double-checked locking）</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;单例模式的一种实现方式，如果没有volatile关键字，会出现bug。</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;volatile关键字可以保证jvm执行的一定的”有序性”，在指令1和指令2执行完之前，指定3一定不会被执行。（禁止重排序）<br> 保证了volatile变量被修改后立刻刷新会驻内存中。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">   public class Singleton &#123;  </span><br><span class="line">   	private volatile static Singleton singleton;  </span><br><span class="line">   	private Singleton ()&#123;&#125; </span><br><span class="line">    public static Singleton getSingleton() &#123; </span><br><span class="line">	    if (singleton == null) &#123;</span><br><span class="line">	        synchronized (Singleton.class) &#123;  </span><br><span class="line">	        if (singleton == null) &#123;  </span><br><span class="line">	            singleton = new Singleton();  </span><br><span class="line">	        &#125; </span><br><span class="line">	        &#125;  </span><br><span class="line">	    &#125;  </span><br><span class="line">	    return singleton;  </span><br><span class="line">   &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br><br>参考资料：</p>
+<pre><code>public class Singleton {  
+    private volatile static Singleton singleton;  
+    private Singleton (){} 
+    public static Singleton getSingleton() { 
+        if (singleton == null) {
+            synchronized (Singleton.class) {  
+            if (singleton == null) {  
+                singleton = new Singleton();  
+            } 
+            }  
+        }  
+        return singleton;  
+   }  
+} 
+</code></pre><p> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br><br>参考资料：</p>
 <p>-《Java并发编程的艺术》 方腾飞 魏鹏 程晓明 著</p>
 <ul>
 <li><a href="https://www.jianshu.com/p/195ae7c77afe" target="_blank" rel="noopener">https://www.jianshu.com/p/195ae7c77afe </a></li>
