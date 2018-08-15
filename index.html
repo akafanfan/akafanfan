@@ -149,88 +149,10 @@
       <div class="post-content">
         <!-------------->
         
-          <h3 id="动态代理"><a href="#动态代理" class="headerlink" title="动态代理"></a>动态代理</h3><p>什么是动态代理？<strong>动态代理是在实现阶段不用关心代理谁，而在运行阶段才指定代理哪一个对象。</strong><br>常见的切面编程AOP(<em>Abspect Oriented Programming</em>)，其核心就是采用了动态代理机制。<br><img src="https://upload-images.jianshu.io/upload_images/12028628-5734dd9c961173c7.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="动态代理.jpg"><br>从类图中看到增加了一个InvocationHandler接口和GamePlayIH类，作用就是产生一个对象的代理对象，其中InvocationHandle是JDK提供的动态代理接口，对被代理类的方法进行代理。</p>
-<blockquote>
-<p>动态代理类</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">public class GamePlayH implements InvocationHandler &#123;</span><br><span class="line">	//被代理者</span><br><span class="line">	Class cls = null;</span><br><span class="line">	//被代理的实例</span><br><span class="line">	Object obj = null;</span><br><span class="line">	//代理的目标 </span><br><span class="line">	public GamePlayH(Object _obj) &#123;</span><br><span class="line">		this.obj = _obj;</span><br><span class="line">	&#125;</span><br><span class="line">	//调用被代理的方法</span><br><span class="line">	@Override</span><br><span class="line">	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable &#123;</span><br><span class="line">		Object res = method.invoke(this.obj, args);</span><br><span class="line">		return res;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>其中invoke方法是接口InvocationHandle定义必须实现的，它完成对真实方法的调用。动态代理是根据被代理的接口生成所有的方法，也就是给定一个接口，动态代理会宣称，我们已经实现该接口下的所有方法了。默认情况下所有方法的返回值都是空的，代理已经实现了它了，通过InvocationHandle接口，所有方法都由该Handle来进行处理，即所有被代理的方法都由InvocationHandle接管实际的处理任务。</p>
-<blockquote>
-<p>动态代理的场景</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public class Client &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		//定义一个玩家</span><br><span class="line">		IGamePlayer player = new GamePlayer(&quot;张三&quot;);</span><br><span class="line">		//定义一个Handle</span><br><span class="line">		InvocationHandler handle = new GamePlayH(player);</span><br><span class="line">		//开始游戏 ，记下时间</span><br><span class="line">		System.out.println(&quot;开始时间:2018-8-2 13:10&quot;);</span><br><span class="line">		//获得类 的 class loader</span><br><span class="line">		ClassLoader cl = player.getClass().getClassLoader();</span><br><span class="line">		//动态产生一个代理类</span><br><span class="line">		IGamePlayer proxy = (IGamePlayer) Proxy.newProxyInstance(cl, new Class[]&#123;IGamePlayer.class&#125;, handle);</span><br><span class="line">		//登录</span><br><span class="line">		proxy.login(&quot;yangfan&quot;, &quot;123123&quot;);</span><br><span class="line">		//操作</span><br><span class="line">		proxy.killBoss();</span><br><span class="line">		proxy.upgrade();</span><br><span class="line">		//记录结束游戏时间</span><br><span class="line">		System.out.println(&quot;结束时间:2018-8-2 15:10&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>结果：</p>
-<blockquote>
-<p>开始时间:2018-8-2 13:10<br>登录名为yangfan的用户张三 登录成功<br>张三在击杀小怪<br>张三又升一级<br>结束时间:2018-8-2 15:10</p>
-</blockquote>
-</blockquote>
-<p>既没有创建代理类，也没有实现IGamePlayer接口，这就是动态代理。进阶，在游戏登录后发送一个信息告知登录，防止盗号异地登录。</p>
-<blockquote>
-<p>修改后的动态代理</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public class GamePlayH2 implements InvocationHandler &#123;</span><br><span class="line">	//被代理者</span><br><span class="line">	Class cls = null;</span><br><span class="line">	//被代理的实例</span><br><span class="line">	Object obj = null;</span><br><span class="line">	//代理的目标 </span><br><span class="line">	public GamePlayH2(Object _obj) &#123;</span><br><span class="line">		this.obj = _obj;</span><br><span class="line">	&#125;</span><br><span class="line">	//调用被代理的方法</span><br><span class="line">	@Override</span><br><span class="line">	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable &#123;</span><br><span class="line">		Object res = method.invoke(this.obj, args);</span><br><span class="line">		//如果是登录方法那么进行信息反馈</span><br><span class="line">		if(method.getName().equalsIgnoreCase(&quot;login&quot;))&#123;</span><br><span class="line">			System.out.println(&quot;有人在用我的账号登录&quot;);</span><br><span class="line">		&#125;</span><br><span class="line">		return res;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>结果：</p>
-<blockquote>
-<p>开始时间:2018-8-2 13:10<br>登录名为yangfan的用户张三 登录成功<br>有人在用我的账号登录<br>张三在击杀小怪<br>张三又升一级<br>结束时间:2018-8-2 15:10</p>
-</blockquote>
-</blockquote>
-<p>这就可以看作AOP编程，AOP编程没有使用新的技术，但是它对我们的设计、编码有非常大的影响，对于日志、事务、权限等都可以在系统设计阶段不用考虑，在后期通过AOP的方式切过去。</p>
-<blockquote>
-<p>通用动态代理的模型：</p>
-</blockquote>
-<p><img src="https://upload-images.jianshu.io/upload_images/12028628-2283fe1d919f0f54.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="动态代理通用类图.jpg"><br>两条发展的路线。动态代理实现代理的职责，业务逻辑Subject实现相关的逻辑功能，两者之间没有必然的互相耦合的关系。通知Advice从另一个切面切入，最终在高层模块也就是Client进行耦合，完成逻辑的封装任务。</p>
-<blockquote>
-<p>抽象主题</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public interface Subject&#123;</span><br><span class="line">     //业务操作</span><br><span class="line">     public void doSomething(String str);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>真实主题</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public class RealSubject implements Subject &#123;</span><br><span class="line">	//业务操作</span><br><span class="line">	@Override</span><br><span class="line">	public void doSomething(String str) &#123;</span><br><span class="line">		System.out.println(&quot;do something&quot;+str);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>动态代理的Handle类</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public class MyInvocationHandler implements InvocationHandler &#123;</span><br><span class="line">	//被代理的对象</span><br><span class="line">	private Object target = null;</span><br><span class="line">	//通过构造函数传递一个对象</span><br><span class="line">	public MyInvocationHandler(Object _obj) &#123;</span><br><span class="line">		this.target=_obj;</span><br><span class="line">	&#125;</span><br><span class="line">	//代理方法</span><br><span class="line">	@Override</span><br><span class="line">	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable &#123;</span><br><span class="line">		//执行被代理的方法</span><br><span class="line">		return method.invoke(this.target, args);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>动态代理类</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public class DynamicProxy&lt;T&gt; &#123;</span><br><span class="line">	public static &lt;T&gt; T newProxyInstance(ClassLoader loader,Class&lt;?&gt;[] interfaces ,InvocationHandler h)&#123;</span><br><span class="line">		//寻找JoinPoint连接点，AOP框架使用元数据定义</span><br><span class="line">		if(true)&#123;</span><br><span class="line">			//执行一个前置通知</span><br><span class="line">			(new BeforeAdvice()).exec();</span><br><span class="line">		&#125;</span><br><span class="line">		//执行目标返回结果：</span><br><span class="line">		return (T) Proxy.newProxyInstance(loader, interfaces, h);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>通知接口及其实现</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public interface IAdvice &#123;</span><br><span class="line">	//通知的一个方法</span><br><span class="line">	public void exec();</span><br><span class="line">&#125;</span><br><span class="line">public class BeforeAdvice implements IAdvice&#123;</span><br><span class="line">	@Override</span><br><span class="line">	public void exec() &#123;</span><br><span class="line">		System.out.println(&quot;我是前置通知，我被执行了！&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>场景</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public class Client &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		//定义一个主题</span><br><span class="line">		Subject subject = new RealSubject();</span><br><span class="line">		//定义一个Handle</span><br><span class="line">		InvocationHandler handler = new MyInvocationHandler(subject);</span><br><span class="line">		//定义主题的代理</span><br><span class="line">		Subject proxy = DynamicProxy.newProxyInstance(subject.getClass().getClassLoader(), subject.getClass().getInterfaces(), handler);</span><br><span class="line">		//代理的行为</span><br><span class="line">		proxy.doSomething(&quot;完成&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>结果：</p>
-<blockquote>
-<p>我是前置通知，我被执行了！<br>do something完成</p>
-</blockquote>
-</blockquote>
-<p>在<strong>DynamicProxy</strong>中我们有这样的方法：<br><code>this.obj = Proxy.newProxyInstance( c.getClassLoader() , c.getInterfaces() , new MyInvocationHandler(_obj) )</code><br>该方法是重新生成了一个对象，为什么要重新生成，因为需要使用代理。<code>c.getInterfaces()</code>是说查找到该类的所有接口，然后实现接口的所有方法。方法是空的，是由<code>new MyInvocationHandler(_obj)</code>这个对象负责接管。于是我们知道一个类的动态代理类是这样一个类，由InvocationHandler的实现类实现所有的方法，由其invoke方法接管所有的方法的实现，其动态调用过程如下图：<br><img src="https://upload-images.jianshu.io/upload_images/12028628-3185ff354d13959b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="动态代理调用过程示意图.jpg"></p>
-<p><strong>DynamicProxy</strong>它是一个通用类，不具有业务意义，可以产生一个它的实现类</p>
-<blockquote>
-<p>DynamicProxy的具体业务实现类</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">import java.lang.reflect.InvocationHandler;</span><br><span class="line"></span><br><span class="line">public class SubjectDynamicProxy extends DynamicProxy &#123;</span><br><span class="line">	public static &lt;T&gt; T newProxyInstance(Subject subject)&#123;</span><br><span class="line">		//获得ClassLoader</span><br><span class="line">		ClassLoader loader = subject.getClass().getClassLoader();</span><br><span class="line">		//获得接口数组</span><br><span class="line">		Class&lt;?&gt;[] classes = subject.getClass().getInterfaces();</span><br><span class="line">		//获得handler</span><br><span class="line">		InvocationHandler handler = new MyInvocationHandler(subject);</span><br><span class="line">		return newProxyInstance(loader, classes, handler);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>扩展以后，高层模块对代理的访问会更简单</p>
-<blockquote>
-<p>具体业务的场景 </p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public class Client_具体业务的场景 &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		//定义一个主题</span><br><span class="line">		Subject subject = new RealSubject();</span><br><span class="line">		//定义主题的代理</span><br><span class="line">		Subject proxy = SubjectDynamicProxy.newProxyInstance(subject);</span><br><span class="line">		//代理的行为</span><br><span class="line">		proxy.doSomething(&quot;Finish&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>结果：</p>
-<blockquote>
-<p>我是前置通知，我被执行了！<br>do somethingFinish</p>
-</blockquote>
-</blockquote>
-<p><strong>动态代理的主要意图就是解决我们常说的横切面编程，在不改变我们已有代码的结构的情况下增强或控制对象的行为。</strong></p>
-<hr>
-
+          <h3 id="动态代理"><a href="#动态代理" class="headerlink" title="动态代理"></a>动态代理</h3><p>什么是动态代理？<strong>动态代理是在实现阶段不用关心代理谁，而在运行阶段才指定代理哪一个对象。</strong><br>常见的切面编程AOP(<em>Abspect Oriented Programming</em>)，其核心就是采用了动态代理机制。<br>
+          <div id="read-more">
+            <a href="/2018/08/05/代理模式2/">阅读更多</a>
+          </div>
         
         <!-------------->
       </div>
