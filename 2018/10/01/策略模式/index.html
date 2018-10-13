@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#34495e">
+  <title>���ģʽ������ģʽ | Fan&#39;s Blog</title>
+  <link rel="alternate" href="path/of/rss" type="application/atom+xml">
+  <link rel="shortcut icon" type="image/ico" href="/fan.ico">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+  
+
+  
+
+  
+
+</head>
+
+<body>
+  <div class="mobile-header">
+    <span><i class="iconfont icon-turnon" id="mobile-nav-toggle"></i></span>
+    <div class="mobile-logo">
+      <a href="/.">FanStudio</a>
+    </div>
+  </div>
+  <div class="page" id="mobile-nav-panel">
+    <div class="container">
+      <header class="site-nav">
+      <div class="nav-content">
+        <div class="logo">
+          <a href="/">FanStudio</a>
+        </div>
+        <nav class="navbar">
+          <ul>
+            
+              <li class="menu-item">
+                <a href="/" class="menu-item-link"><i class="iconfont icon-home"></i>首页</a>
+              </li>
+            
+              <li class="menu-item">
+                <a href="/archives" class="menu-item-link"><i class="iconfont icon-archive"></i>归档</a>
+              </li>
+            
+              <li class="menu-item">
+                <a href="/categories" class="menu-item-link"><i class="iconfont icon-category"></i>分类</a>
+              </li>
+            
+              <li class="menu-item">
+                <a href="/tags" class="menu-item-link"><i class="iconfont icon-tags"></i>标签</a>
+              </li>
+            
+              <li class="menu-item">
+                <a href="/about" class="menu-item-link"><i class="iconfont icon-about"></i>关于</a>
+              </li>
+            
+          </ul>
+        </nav>
+      </div>
+</header>
+
+      <div class="banner">
+  <div class="show">
+    <!-- <img src="/" alt="banner"> -->
+    <div class="banner-title">
+      
+        <div class="post-title">
+          ���ģʽ������ģʽ
+            <div class="post-tags">
+    		    
+              <a class="tag-link" href="/tags/���gʽ/">���ģʽ</a>
+            
+    	      </div>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+      <main class="main"id="main">
+          <article class="post">
+  
+
+  <header>
+    <div class="post-title mobile-post-title">
+      <h1>���ģʽ������ģʽ</h1>
+        <div class="post-tags">
+        
+          <a class="tag-link" href="/tags/���gʽ/">���ģʽ</a>
+        
+        </div>
+    </div>
+    <div class="post-meta">
+      <span class="post-time"><i class="iconfont icon-calendar"></i>2018-10-01</span>
+      
+          
+            <i class="iconfont icon-divide"></i>
+            <i class="iconfont icon-folder" style="color: #8a8a8a;"></i>
+            <a class="post-category" href="/categories/���gʽ/">���ģʽ</a>
+          
+      
+      <!----------------------------------->
+        
+          <i class="iconfont icon-divide"></i>
+          <div class="post-visits"
+               data-url="/2018/10/01/策略模式/"
+               data-title="���ģʽ������ģʽ">
+              阅读次数
+            </div>
+        
+      <!----------------------------------->
+    </div>
+  </header>
+  
+
+  <div class="post-content">
+    <p>###����ģʽ�Ķ���<br>����ģʽ��Strategy Pattern����һ�ֱȽϼ򵥵�ģʽ��Ҳ������ģʽ��Policy Pattern���䶨�����£�Define a family of algorithms each one , and make them interchangeable(����һ���㷨����ÿ���㷨����װ����������ʹ����֮����Ի���)<br><a id="more"></a><br>����������������ȷ��������һ���㷨�����Ƕ�����3����ı������ÿ���㷨��װ����������װ��Context�����ã���ʹ���ǿ��Ի���������Ϊ��ʵ�ֵ�����ͬ�Ľӿڡ�<br><img src="https://upload-images.jianshu.io/upload_images/12028628-a86006e9afd42faf.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="����ģʽͨ����ͼ"><br>����ģʽʹ�õ����������ļ̳кͶ�̬����<br><strong>?Context��װ��ɫ��</strong><br>��Ҳ���������Ľ�ɫ����������·�װ���ã����θ߲�ģ��Բ��ԡ��㷨��ֱ�ӷ��ʣ���װ�ܴ����ű仯<br><strong>?Strategy������Խ�ɫ��</strong><br>���ԡ��㷨����ĳ���ͨ��Ϊ�ӿڣ�����ÿ�����Ի��㷨������еķ��������ԡ���ͼ�е�<code>AlgorithmInterface</code>�����㷨��+�ӿڵ���˼��<br><strong>?ConcreteStrategy��</strong><br>ʵ�ֳ�������еĲ��������ຬ�о����㷨��</p>
+<blockquote>
+<p><strong>����Ĳ��Խ�ɫ</strong><br>��һ����ͨ�Ľӿڡ�<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public interface Strategy &#123;</span><br><span class="line">	//����ģʽ�����㷨��</span><br><span class="line">	public void doSomething();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p><strong>������Խ�ɫ</strong><br>������Խ�ɫҲ�Ƿǳ���ͨ��һ��ʵ���ֻ࣬Ҫʵ�ֽӿ��еķ����Ϳ���<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public class ConcreteStrategy1 implements Strategy&#123;</span><br><span class="line">	@Override</span><br><span class="line">	public void doSomething() &#123;</span><br><span class="line">		System.out.println(&quot;�������1�����㷨��&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line">public class ConcreteStrategy1 implements Strategy&#123;</span><br><span class="line">	@Override</span><br><span class="line">	public void doSomething() &#123;</span><br><span class="line">		System.out.println(&quot;�������1�����㷨��&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p><strong>��װ��ɫ</strong><br>����ģʽ���ص���Ƿ�װ��ɫ�����ǽ����˴���ģʽ��˼·�������ǲ���ģʽ�ķ�װ��ɫ�ͱ���װ�Ĳ����಻����ͬһ���ӿڣ������ͬһ���ӿ��Ǿͳ�Ϊ�˴���ģʽ<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">//��װ��ɫ</span><br><span class="line">public class Context &#123;</span><br><span class="line">	//�������</span><br><span class="line">	private Strategy strategy = null;</span><br><span class="line">	//���캯�����þ������</span><br><span class="line">	public Context(Strategy _strategy)&#123;</span><br><span class="line">		this.strategy = _strategy;</span><br><span class="line">	&#125;</span><br><span class="line">	//��װ��Ĳ��Է���</span><br><span class="line">	public void doAnything()&#123;</span><br><span class="line">		this.strategy.doSomething();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p><strong>�߲�ģ��</strong><br>֪��Ҫ���ĸ����ԣ����������Ķ���Ȼ��ŵ���װ��ɫ��<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public class Client &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		//����һ���������</span><br><span class="line">		Strategy strategy = new ConcreteStrategy1();</span><br><span class="line">		//���������Ķ���</span><br><span class="line">		Context context = new Context(strategy);</span><br><span class="line">		//ִ�з�װ��ķ���</span><br><span class="line">		context.doAnything();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<hr>
+<p>###����ģʽ��Ӧ��</p>
+<p>####����ģʽ���ŵ㣺<br><strong>?�㷨���������л�</strong><br>���ǲ���ģʽ�����壬ֻҪʵ�ֳ����࣬���ͳ�Ϊ���Լ����һ����Ա��ͨ����װ��ɫ������з�װ����֤�����ṩ���������л���ģʽ���Ĳ��ԡ�<br><strong>?����ʹ�ö��������ж�</strong><br>����������ģ��������ú��ֲ��ԣ����Լ�������ṩ�ķ��ʽӿھ��Ƿ�װ�࣬���˲�������ͬʱ��������������жϡ�<br><strong>?��չ������</strong><br>������ϵͳ������һ������ʮ�����ף�ֻҪʵ�ֽӿھͿ��ԣ������������޸ģ�������һ���ɷ�����ж�Ĳ����Ҳ����OCPԭ�򣨿���ԭ��</p>
+<p>####����ģʽ��ȱ�㣺<br><strong>?������������</strong><br>ÿһ�����Զ���һ���࣬���ÿ����Ժ�С������������ࡣ<br><strong>?���в��Զ���Ҫ���Ⱪ¶</strong><br>�ϲ�ģ�����֪������Щ���ԣ�Ȼ����ܾ���ʹ����һ�����ԣ���������ط�������Υ���ġ����ǿ���ʹ��������ģʽ���������ȱ�㣬�繤��ģʽ������ģʽ����Ԫģʽ��</p>
+<p>####����ģʽ��ʹ�ó�����<br><strong>?�����ֻ�����㷨����Ϊ�����в�ͬ�ĳ���</strong><br><strong>?�����Ҫ�����л��ĳ���</strong><br><strong>?��Ҫ�����㷨����ĳ���</strong></p>
+<p>####����ģʽ��ע�����<br>���ϵͳ�е�һ�����Լ���ľ��������������4��������Ҫ����ʹ�û��ģʽ������������ͺͶ��Ⱪ¶�����⡣</p>
+<hr>
+<p>###����ģʽ����չ<br>����3�����������мӼ������㣬������������int�ͣ�ʣ�µ�һ��������String���͵ģ�ֻ�С�+������-���������Ͽ���ѡ�񣬲�Ҫ����ʲô����У�飬���а�����ԣ�����ľ��Ǳ�׼��int ���ͺ�String���͡�</p>
+<p>####ö�ٲ���<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">public enum Calculator &#123;</span><br><span class="line">	// �ӷ�</span><br><span class="line">	ADD(&quot;+&quot;) &#123;</span><br><span class="line">		public int exec(int a, int b) &#123;</span><br><span class="line">			return a+b;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;,</span><br><span class="line">	// ����</span><br><span class="line">	SUB(&quot;-&quot;) &#123;</span><br><span class="line">		public int exec(int a, int b) &#123;</span><br><span class="line">			return a-b;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;;</span><br><span class="line">	String value = &quot;&quot;;</span><br><span class="line">	// �����Աֵ����</span><br><span class="line">	private Calculator(String _value) &#123;</span><br><span class="line">		this.value = _value;</span><br><span class="line">	&#125;</span><br><span class="line">	// ��ȡö�ٳ�Ա��ֵ</span><br><span class="line">	public String getValue()&#123;</span><br><span class="line">		return this.value;</span><br><span class="line">	&#125;</span><br><span class="line">	// ����һ��������</span><br><span class="line">	public abstract int exec(int a,int b);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Ϊʲô�в���ö�٣���������һ��ö���ࡣ������?���Ƕ�����һ������ķ���<code>exec(int a ,int b)</code>Ȼ����ÿ��ö�ٳ�Ա�н���ʵ�֣������ʵ�־Ͳ��ܱ��롣��ԭ�ж����ڳ�������еķ�����ֲ��ö���У�ÿ��ö�ٳ�Ա�ͳ�Ϊһ���������<br>ö�ٲ��Զ������£�</p>
+<ul>
+<li>����һ��ö�١�</li>
+<li>����һ��Ũ���˵Ĳ���ģʽ��ö�١�<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public class Client &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		int a = 1;</span><br><span class="line">		String symbol = &quot;+&quot;;</span><br><span class="line">		int b = 2;</span><br><span class="line">		System.out.println(a+symbol+b+&quot;=&quot;+Calculator.ADD.exec(a, b));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+  </div>
+  <div class="post-footer">the end</div>
+</article>
+
+          
+  <nav class="pagination post-nav">
+    
+    
+      <a href="/2018/08/15/代理模式2/">
+        <span class="next-post">设计模式—代理模式2<i class="iconfont icon-more"></i></span>
+      </a>
+    
+  </nav>
+
+
+          
+  
+    <div id="valine_thread">
+  <p>
+    留言板
+  
+  </p>
+  <div id="valine_comments"></div>
+</div>
+
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+
+<script>
+  var notify = 'false' == true ? true : false;
+  var verify = 'false' == true ? true : false;
+  var GUEST_INFO = ['nick','mail','link'];
+  var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  guest_info = guest_info.length == 0 ? GUEST_INFO : guest_info;
+  new Valine({
+    el: '#valine_comments',
+    notify: notify,
+    verify: verify,
+    appId: "782dKNNzW8HxJexYfbVvglbm-gzGzoHsz",
+    appKey: "Cs9z3WLwO0xYPACvJh8ka6c9",
+    avatar: "retro",
+    placeholder: "欢迎留言~记得填写自己的昵称和邮箱呦~方便联系~",
+    guest_info: guest_info,
+    pageSize:"10"
+  });
+</script>
+
+  
+
+
+      </main>
+    </div>
+    <footer>
+      <div class="social-links">
+        
+          
+        
+          
+            <a href="https://weibo.com/fanfanyang1314"><i class="iconfont icon-weibo"></i></a>
+          
+        
+          
+        
+          
+            <a href="https://www.jianshu.com/u/02166aa314ee"><i class="iconfont icon-stackoverflow"></i></a>
+          
+        
+          
+            <a href="http://steamcommunity.com/id/fanfanyang"><i class="iconfont icon-steam"></i></a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+      
+        <div class="quote">
+          <p>总会有一个人 听你听过的歌 走你走过的路 看你看过的书 愿意弥补曾与你错过的青春和过往 也愿意陪你走过细水长流</p>
+        </div>
+      
+      <div class="copyright">
+        <p>
+          由 <a href="https://hexo.io/">Hexo</a> 强力驱动
+        <p>
+          <span>
+          
+          &copy;
+          
+            2018
+          
+          </span>
+          <i class="iconfont icon-circle"></i>
+          <span>YangFan</span>
+        </p>
+      </div>
+</footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <div id="mobile-nav">
+  <nav id="mobile-nav-menu">
+    
+      <a href="/" class="mobile-nav-link"><i class="iconfont icon-home"></i>首页</a>
+    
+      <a href="/archives" class="mobile-nav-link"><i class="iconfont icon-archive"></i>归档</a>
+    
+      <a href="/categories" class="mobile-nav-link"><i class="iconfont icon-category"></i>分类</a>
+    
+      <a href="/tags" class="mobile-nav-link"><i class="iconfont icon-tags"></i>标签</a>
+    
+      <a href="/about" class="mobile-nav-link"><i class="iconfont icon-about"></i>关于</a>
+    
+    <div class="mobile-intro"><i class="iconfont icon-pen"></i>a space full of imagination</div>
+  </nav>
+</div>
+
+
+  <script src="/libs/jQuery/jquery-3.2.1.min.js"></script>
+  <script src="/libs/slideout/slideout.min.js"></script>
+  
+    <link rel="stylesheet" href="/libs/fancybox/jquery.fancybox.css">
+    <script src="/libs/fancybox/jquery.fancybox.pack.js"></script>
+  
+  
+  <script src="//cdn1.lncld.net/static/js/3.2.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+        appId: "782dKNNzW8HxJexYfbVvglbm-gzGzoHsz",
+        appKey: "Cs9z3WLwO0xYPACvJh8ka6c9"
+      });
+  </script>
+  <script>
+  (function (window) {
+      $(document).ready(function () {
+        visits();
+      });
+    function visits() {
+      var $visits = $('.post-visits');
+
+      function updateVisits(dom, time) {
+        var text = dom.text() + ' ' + time;
+        dom.text(text);
+      }
+
+      function addCounter(Counter) {
+        var query = new AV.Query(Counter);
+
+        var url = $visits.data('url').trim();
+        var title = $visits.data('title').trim();
+
+        query.equalTo('url', url);
+        query.find().then(function (results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.save(null, {
+              fetchWhenSave: true
+            }).then(function (counter) {
+              counter.increment('time', 1);
+              return counter.save();
+            }).then(function (counter) {
+              updateVisits($visits, counter.get('time'));
+            });
+          } else {
+            var newcounter = new Counter();
+            newcounter.set('title', title);
+            newcounter.set('url', url);
+            newcounter.set('time', 1);
+
+            newcounter.save().then(function (counter) {
+              updateVisits($visits, newcounter.get('time'));
+            });
+          }
+        }, function (error) {
+          console.log('Error:' + error.code + " " + error.message);
+        });
+      }
+
+      function showTime(Counter) {
+        $visits.each(function () {
+          var $this = $(this);
+          var query = new AV.Query(Counter);
+          var url = $this.data('url').trim();
+
+          query.equalTo('url', url);
+          query.find().then(function (results) {
+            if (results.length === 0) {
+              updateVisits($this, 0);
+            } else {
+              var counter = results[0];
+              updateVisits($this, counter.get('time'));
+            }
+          }, function (error) {
+            console.log('Error:' + error.code + " " + error.message);
+          });
+        })
+      }
+
+      if (typeof AV === 'object') {
+        var Counter = AV.Object.extend('Counter');
+        if ($visits.length === 1) {
+          addCounter(Counter);
+        } else {
+          showTime(Counter);
+        }
+      }
+    }
+  })(window);
+  </script>
+
+
+  <script src="/js/ztopic.js"></script>
+</body>
+</html>
