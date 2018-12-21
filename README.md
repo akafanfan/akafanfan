@@ -1,0 +1,2 @@
+# akafanfan.github.io
+Hexo
