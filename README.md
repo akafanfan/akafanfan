@@ -1,2 +1,7 @@
-# akafanfan.github.io
-Hexo
+# 帆之亦然工作室个人博客网站
+## 项目描述
+此网站是基于Github Pages 和 Hexo博客框架搭建而成。博客内部分为首页、归档、分类、标签、介绍等模块。在阿里云服务器添加域名解析进行线上部署。自己文章使用Markdown语法进行书写。每次在本地进行编辑完文章后通过Git版本控制工具进行管理至Github的仓库中。
+## 项目技术
+使用html+css+javascript的前端技术进行对Hexo前端框架内部的细节进行更改，比如网站信息，网站的持有人等；使用Git基本语法进行版本控制管理；Hexo的内的文章使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。使用阿里云的云解析DNS功能对Github Pages进行域名解析；使用LeanCloud进行留言管理记录访问流量等交互操作。
+## 项目成果
+http://fanfanstudio.top/
